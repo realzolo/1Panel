@@ -3,11 +3,13 @@ package v1
 import (
 	"encoding/base64"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strconv"
 	"strings"
 	"time"
 
+	"github.com/1Panel-dev/1Panel/backend/app/dto"
 	"github.com/1Panel-dev/1Panel/backend/global"
 	"github.com/1Panel-dev/1Panel/backend/utils/cmd"
 	"github.com/1Panel-dev/1Panel/backend/utils/copier"
@@ -86,23 +88,39 @@ func (b *BaseApi) RedisWsSsh(c *gin.Context) {
 	if wshandleError(wsConn, errors.WithMessage(err, "invalid param rows in request")) {
 		return
 	}
-	redisConf, err := redisService.LoadConf()
-	if wshandleError(wsConn, errors.WithMessage(err, "load redis container failed")) {
-		return
-	}
-
+	name := c.Query("name")
+	from := c.Query("from")
 	defer wsConn.Close()
 	commands := []string{"redis-cli"}
-	if len(redisConf.Requirepass) != 0 {
-		commands = []string{"redis-cli", "-a", redisConf.Requirepass, "--no-auth-warning"}
+	database, err := databaseService.Get(name)
+	if wshandleError(wsConn, errors.WithMessage(err, "no such database in db")) {
+		return
 	}
-	pidMap := loadMapFromDockerTop(redisConf.ContainerName)
-	itemCmds := append([]string{"exec", "-it", redisConf.ContainerName}, commands...)
+	if from == "local" {
+		redisInfo, err := appInstallService.LoadConnInfo(dto.OperationWithNameAndType{Name: name, Type: "redis"})
+		if wshandleError(wsConn, errors.WithMessage(err, "no such database in db")) {
+			return
+		}
+		name = redisInfo.ContainerName
+		if len(database.Password) != 0 {
+			commands = []string{"redis-cli", "-a", database.Password, "--no-auth-warning"}
+		}
+	} else {
+		itemPort := fmt.Sprintf("%v", database.Port)
+		commands = []string{"redis-cli", "-h", database.Address, "-p", itemPort}
+		if len(database.Password) != 0 {
+			commands = []string{"redis-cli", "-h", database.Address, "-p", itemPort, "-a", database.Password, "--no-auth-warning"}
+		}
+		name = "1Panel-redis-cli-tools"
+	}
+
+	pidMap := loadMapFromDockerTop(name)
+	itemCmds := append([]string{"exec", "-it", name}, commands...)
 	slave, err := terminal.NewCommand(itemCmds)
 	if wshandleError(wsConn, err) {
 		return
 	}
-	defer killBash(redisConf.ContainerName, strings.Join(commands, " "), pidMap)
+	defer killBash(name, strings.Join(commands, " "), pidMap)
 	defer slave.Close()
 
 	tty, err := terminal.NewLocalWsSession(cols, rows, wsConn, slave, false)
