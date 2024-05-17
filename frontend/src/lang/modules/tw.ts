@@ -503,6 +503,7 @@ const message = {
         hit: '查找數據庫鍵命中率',
         latestForkUsec: '最近一次 fork() 操作耗費的微秒數',
         redisCliHelper: '未檢測到 redis-cli 服務，請先啟用服務！',
+        redisQuickCmd: 'Redis 快速命令',
 
         recoverHelper: '即將使用 [{0}] 對數據進行覆蓋，是否繼續?',
         submitIt: '覆蓋數據',
@@ -762,6 +763,11 @@ const message = {
         sockPathErr: '請選擇或輸入正確的 Docker sock 文件路徑',
         related: '相關資源',
         includeAppstore: '顯示應用程式商店容器',
+
+        cleanDockerDiskZone: '清理 Docker 使用的磁碟空間',
+        cleanImagesHelper: '( 清理所有未被任何容器使用的鏡像 )',
+        cleanContainersHelper: '( 清理所有處於停止狀態的容器 )',
+        cleanVolumesHelper: '( 清理所有未被使用的本地存儲卷 )',
     },
     cronjob: {
         create: '創建計劃任務',
@@ -969,6 +975,12 @@ const message = {
             bannedIP: 'IP 黑名單',
             logPath: '日誌路徑',
             logPathHelper: '預設為 /var/log/secure 或者 /var/log/auth.log',
+        },
+        ftp: {
+            ftp: 'FTP 帳戶',
+            enableHelper: '啟用選取的 FTP 帳號後，該 FTP 帳號將恢復訪問權限，是否繼續操作？',
+            disableHelper: '停用選取的 FTP 帳號後，該 FTP 帳號將失去訪問權限，是否繼續操作？',
+            syncHelper: '同步伺服器與資料庫中的 FTP 帳戶資料，是否繼續操作？',
         },
     },
     logs: {
@@ -1492,6 +1504,12 @@ const message = {
         shell: 'Shell 腳本計劃任務',
         containerShell: '容器內執行 Shell 腳本計劃任務',
         curl: 'CURL 計劃任務',
+
+        containerTrash: '容器垃圾',
+        images: '鏡像',
+        containers: '容器',
+        volumes: '存儲卷',
+        buildCache: '容器建置快取',
     },
     app: {
         app: '應用',
@@ -1691,8 +1709,8 @@ const message = {
         startHelper: '啟用站點後，用戶可以正常訪問網站內容，是否繼續操作？',
         sitePath: '網站目錄',
         siteAlias: '網站代號',
-        primaryPath: '主目錄',
-        folderTitle: '網站主目錄主要包含四個文件夾',
+        primaryPath: 'root 目錄',
+        folderTitle: '網站主要包含四個文件夾',
         wafFolder: '防火墻規則',
         indexFolder: '網站root目錄',
         logFolder: '網站日誌',

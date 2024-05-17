@@ -36,6 +36,7 @@ export namespace Toolbox {
         uploadClean: Array<CleanTree>;
         downloadClean: Array<CleanTree>;
         systemLogClean: Array<CleanTree>;
+        containerClean: Array<CleanTree>;
     }
     export interface CleanTree {
         id: string;
@@ -74,5 +75,27 @@ export namespace Toolbox {
     export interface Fail2banSet {
         ips: Array<string>;
         operate: string;
+    }
+
+    export interface FtpInfo {
+        id: number;
+        user: string;
+        password: string;
+        status: string;
+        path: string;
+        description: string;
+    }
+    export interface FtpCreate {
+        user: string;
+        password: string;
+        path: string;
+        description: string;
+    }
+    export interface FtpUpdate {
+        id: number;
+        password: string;
+        status: string;
+        path: string;
+        description: string;
     }
 }

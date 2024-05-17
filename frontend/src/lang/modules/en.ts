@@ -515,6 +515,7 @@ const message = {
         hit: 'Find the database key hit ratio',
         latestForkUsec: 'The number of microseconds spent on the last fork() operation',
         redisCliHelper: 'redis-cli service not detected, please enable the service first!',
+        redisQuickCmd: 'Redis quick command',
 
         recoverHelper: 'Data is about to be overwritten with [{0}]. Do you want to continue?',
         submitIt: 'Overwrite the data',
@@ -795,6 +796,11 @@ const message = {
         sockPathErr: 'Please select or enter the correct Docker sock file path',
         related: 'Related resources',
         includeAppstore: 'Show app store container',
+
+        cleanDockerDiskZone: 'Clean up disk space used by Docker',
+        cleanImagesHelper: '( Clean up all images that are not used by any containers )',
+        cleanContainersHelper: '( Clean up all stopped containers )',
+        cleanVolumesHelper: '( Clean up all unused local volumes )',
     },
     cronjob: {
         create: 'Create Cronjob',
@@ -1022,6 +1028,14 @@ const message = {
             bannedIP: 'IP Blacklist',
             logPath: 'Log Path',
             logPathHelper: 'Default is /var/log/secure or /var/log/auth.log',
+        },
+        ftp: {
+            ftp: 'FTP Account',
+            enableHelper:
+                'Enabling the selected FTP account will restore its access permissions. Do you want to continue?',
+            disableHelper:
+                'Disabling the selected FTP account will revoke its access permissions. Do you want to continue?',
+            syncHelper: 'Sync FTP account data between server and database. Do you want to continue?',
         },
     },
     logs: {
@@ -1600,6 +1614,12 @@ const message = {
         shell: 'Shell script scheduled tasks',
         containerShell: 'Container internal Shell script scheduled tasks',
         curl: 'CURL scheduled tasks',
+
+        containerTrash: 'Container Trash',
+        images: 'Images',
+        containers: 'Containers',
+        volumes: 'Volumes',
+        buildCache: 'Container Build Cache',
     },
     app: {
         app: 'Application',
@@ -1812,8 +1832,8 @@ const message = {
             'After enabling the site, users can access the content of the site normally, do you want to continue? ',
         sitePath: 'Website Directory',
         siteAlias: 'Site  Alias',
-        primaryPath: 'Main directory',
-        folderTitle: 'The main directory of the website mainly contains four folders',
+        primaryPath: 'Root directory',
+        folderTitle: 'The website mainly contains four folders',
         wafFolder: 'Firewall Rules',
         indexFolder: 'Website root directory',
         logFolder: 'website log',

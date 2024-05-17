@@ -7647,6 +7647,156 @@ const docTemplate = `{
                 }
             }
         },
+        "/hosts/command/redis": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "获取 redis 快速命令列表",
+                "tags": [
+                    "Redis Command"
+                ],
+                "summary": "List redis commands",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "Array"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "创建 Redis 快速命令",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Redis Command"
+                ],
+                "summary": "Create redis command",
+                "parameters": [
+                    {
+                        "description": "request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.RedisCommand"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-panel-log": {
+                    "BeforeFunctions": [],
+                    "bodyKeys": [
+                        "name",
+                        "command"
+                    ],
+                    "formatEN": "create quick command for redis [name][command]",
+                    "formatZH": "创建 redis 快捷命令 [name][command]",
+                    "paramKeys": []
+                }
+            }
+        },
+        "/hosts/command/redis/del": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "删除 redis 快速命令",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Redis Command"
+                ],
+                "summary": "Delete redis command",
+                "parameters": [
+                    {
+                        "description": "request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.BatchDeleteReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-panel-log": {
+                    "BeforeFunctions": [
+                        {
+                            "db": "redis_commands",
+                            "input_column": "id",
+                            "input_value": "ids",
+                            "isList": true,
+                            "output_column": "name",
+                            "output_value": "names"
+                        }
+                    ],
+                    "bodyKeys": [
+                        "ids"
+                    ],
+                    "formatEN": "delete quick command of redis [names]",
+                    "formatZH": "删除 redis 快捷命令 [names]",
+                    "paramKeys": []
+                }
+            }
+        },
+        "/hosts/command/redis/search": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "获取 redis 快速命令列表分页",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Redis Command"
+                ],
+                "summary": "Page redis commands",
+                "parameters": [
+                    {
+                        "description": "request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.SearchWithPage"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.PageResult"
+                        }
+                    }
+                }
+            }
+        },
         "/hosts/command/search": {
             "post": {
                 "security": [
@@ -9411,7 +9561,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/dto.BatchDeleteReq"
+                            "$ref": "#/definitions/dto.OperateByID"
                         }
                     }
                 ],
@@ -9426,7 +9576,7 @@ const docTemplate = `{
                             "db": "backup_accounts",
                             "input_column": "id",
                             "input_value": "id",
-                            "isList": true,
+                            "isList": false,
                             "output_column": "type",
                             "output_value": "types"
                         }
@@ -11359,6 +11509,219 @@ const docTemplate = `{
                     "200": {
                         "description": "OK"
                     }
+                }
+            }
+        },
+        "/toolbox/ftp": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "创建 FTP 账户",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "FTP"
+                ],
+                "summary": "Create FTP user",
+                "parameters": [
+                    {
+                        "description": "request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.FtpCreate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-panel-log": {
+                    "BeforeFunctions": [],
+                    "bodyKeys": [
+                        "user",
+                        "path"
+                    ],
+                    "formatEN": "create FTP [user][path]",
+                    "formatZH": "创建 FTP 账户 [user][path]",
+                    "paramKeys": []
+                }
+            }
+        },
+        "/toolbox/ftp/del": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "删除 FTP 账户",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "FTP"
+                ],
+                "summary": "Delete FTP user",
+                "parameters": [
+                    {
+                        "description": "request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.BatchDeleteReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-panel-log": {
+                    "BeforeFunctions": [
+                        {
+                            "db": "ftps",
+                            "input_column": "id",
+                            "input_value": "ids",
+                            "isList": true,
+                            "output_column": "user",
+                            "output_value": "users"
+                        }
+                    ],
+                    "bodyKeys": [
+                        "ids"
+                    ],
+                    "formatEN": "delete FTP users [users]",
+                    "formatZH": "删除 FTP 账户 [users]",
+                    "paramKeys": []
+                }
+            }
+        },
+        "/toolbox/ftp/search": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "获取 FTP 账户列表分页",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "FTP"
+                ],
+                "summary": "Page FTP user",
+                "parameters": [
+                    {
+                        "description": "request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.SearchWithPage"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.PageResult"
+                        }
+                    }
+                }
+            }
+        },
+        "/toolbox/ftp/sync": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "同步 FTP 账户",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "FTP"
+                ],
+                "summary": "Sync FTP user",
+                "parameters": [
+                    {
+                        "description": "request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.BatchDeleteReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-panel-log": {
+                    "BeforeFunctions": [],
+                    "bodyKeys": [],
+                    "formatEN": "sync FTP users",
+                    "formatZH": "同步 FTP 账户",
+                    "paramKeys": []
+                }
+            }
+        },
+        "/toolbox/ftp/update": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "修改 FTP 账户",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "FTP"
+                ],
+                "summary": "Update FTP user",
+                "parameters": [
+                    {
+                        "description": "request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.FtpUpdate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-panel-log": {
+                    "BeforeFunctions": [],
+                    "bodyKeys": [
+                        "user",
+                        "path"
+                    ],
+                    "formatEN": "update FTP [user][path]",
+                    "formatZH": "修改 FTP 账户 [user][path]",
+                    "paramKeys": []
                 }
             }
         },
@@ -15819,6 +16182,52 @@ const docTemplate = `{
                 }
             }
         },
+        "dto.FtpCreate": {
+            "type": "object",
+            "required": [
+                "password",
+                "path",
+                "user"
+            ],
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                },
+                "user": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.FtpUpdate": {
+            "type": "object",
+            "required": [
+                "password",
+                "path"
+            ],
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
         "dto.GPUInfo": {
             "type": "object",
             "properties": {
@@ -17321,6 +17730,20 @@ const docTemplate = `{
                 },
                 "pageSize": {
                     "type": "integer"
+                }
+            }
+        },
+        "dto.RedisCommand": {
+            "type": "object",
+            "properties": {
+                "command": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
                 }
             }
         },

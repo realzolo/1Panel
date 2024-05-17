@@ -503,6 +503,7 @@ const message = {
         hit: '查找数据库键命中率',
         latestForkUsec: '最近一次 fork() 操作耗费的微秒数',
         redisCliHelper: '未检测到 redis-cli 服务，请先启用服务！',
+        redisQuickCmd: 'Redis 快速命令',
 
         recoverHelper: '即将使用 [{0}] 对数据进行覆盖，是否继续?',
         submitIt: '覆盖数据',
@@ -763,6 +764,11 @@ const message = {
         sockPathErr: '请选择或输入正确的 Docker sock 文件路径',
         related: '关联资源',
         includeAppstore: '显示应用商店容器',
+
+        cleanDockerDiskZone: '清理 Docker 使用的磁盘空间',
+        cleanImagesHelper: '( 清理所有未被任何容器使用的镜像 )',
+        cleanContainersHelper: '( 清理所有处于停止状态的容器 )',
+        cleanVolumesHelper: '( 清理所有未被使用的本地存储卷 )',
     },
     cronjob: {
         create: '创建计划任务',
@@ -970,6 +976,12 @@ const message = {
             bannedIP: 'IP 黑名单',
             logPath: '日志路径',
             logPathHelper: '默认 /var/log/secure 或者 /var/log/auth.log',
+        },
+        ftp: {
+            ftp: 'FTP 账户',
+            enableHelper: '启用选中的 FTP 账号后，该 FTP 账号恢复访问权限，是否继续操作？',
+            disableHelper: '停用选中的 FTP 账号后，该 FTP 账号将失去访问权限，是否继续操作？',
+            syncHelper: '同步服务器与数据库中的 FTP 账户数据，是否继续操作？',
         },
     },
     logs: {
@@ -1492,6 +1504,12 @@ const message = {
         shell: 'Shell 脚本计划任务',
         containerShell: '容器内执行 Shell 脚本计划任务',
         curl: 'CURL 计划任务',
+
+        containerTrash: '容器垃圾',
+        images: '镜像',
+        containers: '容器',
+        volumes: '存储卷',
+        buildCache: '构建缓存',
     },
     app: {
         app: '应用',
@@ -1691,8 +1709,8 @@ const message = {
         startHelper: '启用站点后，用户可以正常访问网站内容，是否继续操作？',
         sitePath: '网站目录',
         siteAlias: '网站代号',
-        primaryPath: '主目录',
-        folderTitle: '网站主目录主要包含四个文件夹',
+        primaryPath: 'root 目录',
+        folderTitle: '网站主要包含四个文件夹',
         wafFolder: '防火墙规则',
         indexFolder: '网站 root 目录（PHP 运行环境 静态网站代码存放目录）',
         logFolder: '网站日志',
