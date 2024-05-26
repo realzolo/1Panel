@@ -17,7 +17,7 @@ import (
 	"github.com/1Panel-dev/1Panel/backend/constant"
 	"github.com/1Panel-dev/1Panel/backend/global"
 	"github.com/1Panel-dev/1Panel/backend/utils/files"
-	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/image"
 	"github.com/docker/docker/client"
 )
 
@@ -235,7 +235,11 @@ func (r *Remote) Backup(info BackupInfo) error {
 			return fmt.Errorf("mkdir %s failed, err: %v", info.TargetDir, err)
 		}
 	}
-	outfile, _ := os.OpenFile(path.Join(info.TargetDir, info.FileName), os.O_RDWR|os.O_CREATE, 0755)
+	outfile, err := os.OpenFile(path.Join(info.TargetDir, info.FileName), os.O_RDWR|os.O_CREATE, 0755)
+	if err != nil {
+		return fmt.Errorf("open file %s failed, err: %v", path.Join(info.TargetDir, info.FileName), err)
+	}
+	defer outfile.Close()
 	dumpCmd := "mysqldump"
 	if r.Type == constant.AppMariaDB {
 		dumpCmd = "mariadb-dump"
@@ -417,7 +421,7 @@ func loadImage(dbType, version string) (string, error) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	images, err := cli.ImageList(context.Background(), types.ImageListOptions{})
+	images, err := cli.ImageList(context.Background(), image.ListOptions{})
 	if err != nil {
 		fmt.Println(err)
 	}

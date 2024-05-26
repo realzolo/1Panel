@@ -171,6 +171,7 @@ const message = {
             commonName: '支持非特殊字符开头,英文、中文、数字、.-和_,长度1-128',
             userName: '支持英文、中文、数字和_,长度3-30',
             simpleName: '支持非下划线开头，英文、数字、_,长度3-30',
+            simplePassword: '支持非下划线开头，英文、数字、_,长度6-30',
             dbName: '支持非特殊字符开头，英文、中文、数字、.-_,长度1-64',
             imageName: '支持英文、数字、:/.-_,长度1-150',
             volumeName: '支持英文、数字、.-和_,长度2-30',
@@ -266,6 +267,7 @@ const message = {
             year: '年',
             time: '次',
             core: '核',
+            millisecond: '毫秒',
         },
         operate: {
             down: '停止',
@@ -979,6 +981,8 @@ const message = {
         },
         ftp: {
             ftp: 'FTP 账户',
+            noFtp: '未检测到 FTP (pure-ftpd) 服务，请参考官方文档进行安装！',
+            operation: '对 FTP 服务进行 [{0}] 操作，是否继续？',
             enableHelper: '启用选中的 FTP 账号后，该 FTP 账号恢复访问权限，是否继续操作？',
             disableHelper: '停用选中的 FTP 账号后，该 FTP 账号将失去访问权限，是否继续操作？',
             syncHelper: '同步服务器与数据库中的 FTP 账户数据，是否继续操作？',
@@ -1454,6 +1458,7 @@ const message = {
         tamper: '升级专业版可以保护网站免受未经授权的修改或篡改。',
         gpu: '升级专业版可以帮助用户实时直观查看到 GPU 的工作负载、温度、显存等重要参数。',
         setting: '升级专业版可以自定义面板 Logo、欢迎简介等信息。',
+        monitor: '升级专业版可以查看网站的实时状态、访客趋势、访客来源、请求日志等信息。',
     },
     clean: {
         scan: '开始扫描',
@@ -1614,6 +1619,10 @@ const message = {
         zipFormat: '.tar.gz 压缩包结构：test.tar.gz 压缩包内，必需包含 {0} 文件',
         proxy: '反向代理',
         alias: '代号',
+        enableFtp: '创建 FTP',
+        ftpUser: 'FTP 账号',
+        ftpPassword: 'FTP 密码',
+        ftpHelper: '创建站点的同时，为站点创建一个对应 FTP 帐户，并且 FTP 目录指向站点所在目录。',
         remark: '备注',
         group: '分组',
         groupSetting: '分组管理',

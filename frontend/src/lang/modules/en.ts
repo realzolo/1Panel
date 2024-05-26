@@ -170,7 +170,8 @@ const message = {
             commonName:
                 'Supports non-special characters starting with English, Chinese, numbers, .- and _, length 1-128',
             userName: 'Support English, Chinese, numbers and _ length 3-30',
-            simpleName: 'Supports non-underscore starting, English, numbers, _, length 1-30',
+            simpleName: 'Supports non-underscore starting, English, numbers, _, length 3-30',
+            simplePassword: 'Supports non-underscore starting, English, numbers, _, length 6-30',
             dbName: 'Supports non-special character starting, including English, Chinese, numbers, .-_, with a length of 1-64',
             imageName: 'Support English, numbers, :/.-_, length 1-150',
             volumeName: 'Support English, numbers, .-_, length 2-30',
@@ -268,6 +269,7 @@ const message = {
             year: 'Year',
             time: 'Time',
             core: 'Core',
+            millisecond: 'Millisecond',
         },
         operate: {
             down: 'Stop',
@@ -1031,6 +1033,8 @@ const message = {
         },
         ftp: {
             ftp: 'FTP Account',
+            noFtp: 'FTP (pure-ftpd) service not detected, please refer to the official documentation for installation!',
+            operation: 'Perform [{0}] operation on FTP service, continue?',
             enableHelper:
                 'Enabling the selected FTP account will restore its access permissions. Do you want to continue?',
             disableHelper:
@@ -1560,6 +1564,8 @@ const message = {
         gpu: 'Upgrading to the professional version can help users visually monitor important parameters of GPU such as workload, temperature, memory usage in real time.',
         setting:
             'Upgrading to the professional version allows customization of panel logo, welcome message, and other information.',
+        monitor:
+            'Upgrade to the professional version to view the real-time status of the website, visitor trends, visitor sources, request logs and other information. ',
     },
     clean: {
         scan: 'Start Scanning',
@@ -1732,6 +1738,10 @@ const message = {
         zipFormat: '.tar.gz compressed package structure: test.tar.gz compressed package must contain {0} file',
         proxy: 'Reverse Proxy',
         alias: 'Path Name',
+        ftpUser: 'FTP Account',
+        ftpPassword: 'FTP Password',
+        ftpHelper:
+            'Create an FTP account corresponding to the site while creating the site, and the FTP directory points to the directory where the site is located.',
         remark: 'Remark',
         group: 'Group',
         groupSetting: 'Group Management',
